@@ -1,0 +1,58 @@
+.btn {
+    -webkit-appearance: none;
+    display: inline-block;
+    border: 0;
+    border-radius: 30px 30px 30px 0;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 17px 25px;
+    outline: 0;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.btn-full {
+        border: 2px solid $black;
+        background: $black;
+        color: $white;
+
+        &:hover,
+        &:focus {
+            background: $black--hover;
+            border: 2px solid $black--hover;
+            color: white;
+        }
+
+        &:active {
+            background: $black--active;
+            border: 2px solid $black--active;
+        }
+    }
+
+    &.btn-hollow {
+        border: 2px solid $black;
+        background: transparent;
+
+        &:hover,
+        &:focus {
+            background: $black--hover;
+            border: 2px solid $black--hover;
+            color: white;
+        }
+
+        &:active {
+            background: $black--active;
+            border: 2px solid $black--active;
+        }
+    }
+
+    &.btn-inactive {
+        background: $black--hover;
+        padding: 11px 25px;
+        cursor: auto;
+    }
+}

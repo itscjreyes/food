@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Open+SansOpen+Sans:wght@400;800&display=swap');
+
+$font--title: 'Open Sans', sans-serif;
+$font--body: 'Open Sans', sans-serif;
+
+body {
+    font-family: $font--body;
+    font-weight: 400;
+    color: $black;
+}
+
+h1 {
+    font-family: $font--title;
+}
+
+h1, h2, h3, h4, h5 {
+    line-height: 1.2;
+}
+
+p,
+li {
+    font-size: 18px;
+    line-height: 1.6;
+}

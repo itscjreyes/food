@@ -1,0 +1,27 @@
+body {
+    background: $white;
+}
+
+.app {
+    overflow-x: hidden;
+}
+
+.container {
+    padding: 60px 6%;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.lazyload,
+.lazyloading {
+    opacity: 0;
+}
+.lazyloaded {
+    opacity: 1;
+}
+
+@media screen and (max-width: 767px) {
+    .container {
+        padding: 40px 4%;
+    }
+}
