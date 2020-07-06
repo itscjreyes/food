@@ -13,46 +13,5 @@
     outline: 0;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.2s ease;
-
-    &.btn-full {
-        border: 2px solid $black;
-        background: $black;
-        color: $white;
-
-        &:hover,
-        &:focus {
-            background: $black--hover;
-            border: 2px solid $black--hover;
-            color: white;
-        }
-
-        &:active {
-            background: $black--active;
-            border: 2px solid $black--active;
-        }
-    }
-
-    &.btn-hollow {
-        border: 2px solid $black;
-        background: transparent;
-
-        &:hover,
-        &:focus {
-            background: $black--hover;
-            border: 2px solid $black--hover;
-            color: white;
-        }
-
-        &:active {
-            background: $black--active;
-            border: 2px solid $black--active;
-        }
-    }
-
-    &.btn-inactive {
-        background: $black--hover;
-        padding: 11px 25px;
-        cursor: auto;
-    }
+    transition: all 0.2s ease; cursor: auto;
 }

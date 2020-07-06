@@ -1,0 +1,16 @@
+.results-wrapper {
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .results-wrapper {
+        .container {
+            margin: 0 -10px;
+        }
+    }
+}

@@ -37,7 +37,6 @@ class Home extends Component {
     const {data, isLoading} = this.state;
     return (
       <div>
-        <h1>Fooooood</h1>
         {
           isLoading ?
           <Loader />

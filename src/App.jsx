@@ -6,11 +6,13 @@ import DetailPage from './Pages/Detail/detail.component';
 import ScrollIntoView from './Components/ScrollIntoView/scrollintoview.component';
 import EditPage from './Pages/Edit/edit.component';
 import AddPage from './Pages/Add/add.component';
+import Header from './Components/Header/header.component';
 
 class App extends Component {
   render(){
     return(
       <div className="App">
+        <Header />
         <ScrollIntoView>
             <Route exact path="/" component={Home} />
             <Route exact path="/:pageId" component={DetailPage} />
