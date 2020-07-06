@@ -34,10 +34,10 @@ class Home extends Component {
   }
 
   render(){
-    const {data, tags, searchQuery, isLoading} = this.state;
+    const {data, isLoading} = this.state;
     return (
       <div>
-        <h1>Hello, Mackenzie</h1>
+        <h1>Fooooood</h1>
         {
           isLoading ?
           <Loader />

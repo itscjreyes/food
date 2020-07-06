@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from '../../firebase/firebase';
-import {Link} from 'react-router-dom';
 import {Tags} from '../../Components/Tags/tags.component';
 
 import TextField from '@material-ui/core/TextField';
@@ -8,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import SimpleMDE from 'react-simplemde-editor';
 import "easymde/dist/easymde.min.css";
 
-class EditPage extends Component{
+class AddPage extends Component{
     constructor(){
         super();
 
@@ -18,32 +17,10 @@ class EditPage extends Component{
             tags: [],
             ingredients: '',
             steps: '',
-            id: ''
+            id: '',
+            image: null,
+            imageFile: null
         }
-    }
-
-    fetchData = () => {
-        const db = firebase.firestore();
-        const slug = this.props.location.pathname.replace('/','').replace('edit','');
-        const docRef = db.collection('recipes').doc(slug);
-        docRef.get().then(doc => {
-            const data = doc.data();
-            this.setState({
-                title: data.title,
-                slug: data.slug,
-                tags: data.tags,
-                ingredients: data.ingredients,
-                steps: data.steps,
-                id: doc.id,
-                image: data.image
-            })
-        }).catch(err => {
-            console.log(err);
-        });
-    }
-
-    componentDidMount(){
-        this.fetchData();
     }
 
     handleTitleChange = (event) => {
@@ -55,7 +32,7 @@ class EditPage extends Component{
         if (!snackbar) {
             const createSnackbar = document.createElement('div');
             createSnackbar.setAttribute('class', 'snackbar');
-            const snackbarContent = document.createTextNode("Updated!")
+            const snackbarContent = document.createTextNode("Adding...")
             createSnackbar.append(snackbarContent);
             document.body.appendChild(createSnackbar);
         }
@@ -63,37 +40,34 @@ class EditPage extends Component{
         setTimeout(() => {
             const snackbar = document.querySelector('.snackbar');
             snackbar.classList.add('open')
-        }, 1000);
-
-        setTimeout(() => {
-            const snackbar = document.querySelector('.snackbar');
-            snackbar.classList.remove('open')
-        }, 3000);
+        }, 100);
     }
 
-    onUpdate = () => {
-        const {title, ingredients, slug, steps, tags, id, imageFile} = this.state;
-
-        const db = firebase.firestore();
-        db.collection('recipes').doc(id).set({
-            title, ingredients, slug, steps, tags
-        });
+    onAdd = () => {
+        const {title, ingredients, steps, tags, imageFile} = this.state;
+        const newSlug = title.toLowerCase().replace(/ /g,'-');
 
         const storage = firebase.storage();
 
         const uploadTask = storage.ref(`/images/${imageFile.name}`).put(imageFile)
+        //initiates the firebase side uploading 
         uploadTask.on('state_changed', 
         (snapShot) => {
+        //takes a snap shot of the process as it is happening
         console.log(snapShot)
         }, (err) => {
+        //catches the errors
         console.log(err)
         }, () => {
+        // gets the functions from storage refences the image storage in firebase by the children
+        // gets the download url then sets the image from firebase as the value for the imgUrl key:
         storage.ref('images').child(imageFile.name).getDownloadURL()
             .then(fireBaseUrl => {
                 const db = firebase.firestore();
-                db.collection('recipes').doc(id).set({
+                db.collection('recipes').doc(newSlug).set({
                     title: title,
                     ingredients: ingredients,
+                    slug: newSlug,
                     steps: steps,
                     tags: tags,
                     image: fireBaseUrl
@@ -101,9 +75,11 @@ class EditPage extends Component{
             })
         })
 
+        this.handleSnackbar();
+
         setTimeout(() => {
-            this.handleSnackbar();
-        }, 500);
+            window.location.replace(`/${newSlug}`)
+        }, 5000);
     }
     
     handleAddTag = e => {
@@ -147,15 +123,15 @@ class EditPage extends Component{
     }
 
     render(){
-        const {title, ingredients, slug, steps, tags} = this.state;
+        const {ingredients, steps, tags} = this.state;
 
         return (
             <>
-            <h1>EDIT PAGE</h1>
+            <h1>ADD PAGE</h1>
             <TextField
                 variant="outlined"
                 name="title"
-                value={title}
+                placeholder="Recipe Title"
                 onChange={this.handleTitleChange}
             />
             {
@@ -176,16 +152,16 @@ class EditPage extends Component{
             <SimpleMDE onChange={this.handleStepsChange} value={steps} />
             <h2>Ingredients</h2>
             <SimpleMDE onChange={this.handleIngredientsChange} value={ingredients} />
+            <h2>Image</h2>
             <TextField 
                 type="file"
                 onChange={this.handleAddImage}
             />
             <img src={this.state.image} alt={this.state.title}/>
-            <Button variant="contained" size="medium" color="default" onClick={this.onUpdate}>Update</Button>
-            <Link to={`/${slug}`}>View Recipe</Link>
+            <Button variant="contained" size="large" color="default" onClick={this.onAdd}>Add Recipe</Button>
             </>
         )
     }
 }
 
-export default EditPage;
+export default AddPage;

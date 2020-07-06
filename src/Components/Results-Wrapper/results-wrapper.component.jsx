@@ -21,6 +21,7 @@ const ResultsWrapper = props => {
                                 key={i}
                                 title={item.title}
                                 slug={item.slug}
+                                image={item.image}
                             />
                         ))
                     }

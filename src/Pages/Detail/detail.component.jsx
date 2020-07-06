@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../../firebase/firebase';
-import { Steps } from '../../Components/Steps/steps.component';
-import { Ingredients } from '../../Components/Ingredients/ingredients.component';
+import ReactMarkdown from 'react-markdown';
+import {Link} from 'react-router-dom';
 
 class DetailPage extends Component{
     constructor(){
@@ -36,18 +36,14 @@ class DetailPage extends Component{
         return (
             <>
             <h1>{data.data.title}</h1>
-            {
-                data.data.steps !== undefined &&
-                <Steps 
-                    steps={data.data.steps}
-                />
-            }
-            {
-                data.data.ingredients !== undefined &&
-                <Ingredients 
-                    ingredients={data.data.ingredients}
-                />
-            }
+            <img src={data.data.image} alt={data.data.title}/>
+            <ReactMarkdown
+                source={data.data.steps}
+            />
+            <ReactMarkdown
+                source={data.data.ingredients}
+            />
+            <Link to={`${this.props.location.pathname}/edit`}>Edit this recipe</Link>
             </>
         )
     }

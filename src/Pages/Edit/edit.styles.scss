@@ -1,0 +1,28 @@
+.snackbar {
+    position: fixed;
+    width: 90%;
+    max-width: 125px;
+    background: #4caf50;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    border-radius: 4px;
+    left: 0;
+    right: 0;
+    bottom: -80px;
+    margin: auto;
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9;
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+        bottom: 20px;
+    }
+}
