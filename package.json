@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.15.4",
     "lazysizes": "^5.2.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-markdown": "^4.3.1",
